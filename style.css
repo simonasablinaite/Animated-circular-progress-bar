@@ -47,6 +47,7 @@ body {
   position: relative;
   width: 150px;
   height: 150px;
+  transform: rotate(270deg);
 }
 
 .container .card .percent svg circle {
@@ -56,4 +57,91 @@ body {
   stroke-width: 2;
   stroke: #194949;
   transform: translate(5px, 5px);
+}
+
+.container .card .percent svg circle:nth-child(2) {
+  stroke: var(--clr);
+  stroke-dasharray: 440;
+
+  opacity: 0;
+  stroke-dashoffset: calc(440 - (440 * var(--num)) / 100);
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 2;
+  }
+}
+
+.dot {
+  position: absolute;
+  /* background: green; */
+  inset: 5px;
+  z-index: 10;
+  transform: rotate(calc(3.6deg * var(--num)));
+  animation: animateDot 2s linear forwards;
+}
+
+@keyframes animateDot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(calc(3.6deg * var(--num)));
+  }
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--clr);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr);
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+
+  opacity: 0;
+  stroke-dashoffset: calc(440 - (440 * var(--num)) / 100);
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 2s;
+}
+
+.number h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.5em;
+}
+
+.number h1 span {
+  font-weight: 300;
+  color: #fff;
+  font-size: 0.5em;
+}
+
+.number p {
+  font-weight: 300;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
 }
